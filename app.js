@@ -115,7 +115,7 @@ addEventListener('online', netState); addEventListener('offline', netState); net
 
 function render() {
   const v = $('#view');
-  ({ zero: renderZero, rifles: renderRifles, loads: renderLoads, data: renderData, more: renderMore })[tab](v);
+  ({ zero: renderZero, spot: v => renderSpotter(v), rifles: renderRifles, loads: renderLoads, data: renderData, more: renderMore })[tab](v);
 }
 
 // ---------- ZERO ----------
