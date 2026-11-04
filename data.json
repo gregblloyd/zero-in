@@ -1,0 +1,1630 @@
+{
+ "cartridges": [
+  {
+   "id": "9mm",
+   "name": "9mm Luger (9x19mm Parabellum)",
+   "bulletDiameter": 0.355,
+   "maxCaseLength": 0.754,
+   "trimLength": 0.749,
+   "maxCOAL": 1.169,
+   "maxPressurePsi": 35000,
+   "primerSize": "small pistol",
+   "typicalTwist": "1:10 (SAAMI)",
+   "notes": "Headspaces on the case mouth: use a TAPER crimp only (no roll crimp); crimp just enough to remove bell. Cases rarely need trimming; published trim-to varies 0.749-0.750 in. Case is tapered, so a carbide die avoids lube. Bullet setback in semi-autos raises pressure sharply; verify neck tension and seat to the COAL in your data. +P is 38,500 psi (SAAMI) and needs +P data. Some 'Blazer' aluminum and steel cases are Berdan/non-reloadable; discard. Hornady HAP 125 gr is .356 in.",
+   "commonPowders": [
+    "Hodgdon Titegroup",
+    "Hodgdon HP-38",
+    "Winchester 231",
+    "Hodgdon Universal",
+    "Hodgdon CFE Pistol",
+    "Hodgdon HS-6",
+    "Alliant Bullseye",
+    "Alliant Unique",
+    "Alliant Power Pistol",
+    "Alliant Sport Pistol",
+    "Vihtavuori N320",
+    "Vihtavuori N340",
+    "Winchester AutoComp",
+    "Ramshot Silhouette",
+    "Ramshot True Blue",
+    "Accurate No. 5"
+   ],
+   "sources": [
+    "https://loaddata.com/Cartridge/9mm-Luger-9mm-Parabellum-Handloader-issue-350/9896",
+    "https://www.hornady.com/bullets/handgun/9mm-355-124-gr-xtp",
+    "https://sierrabullets.com/9mm-124-gr-jhp-sports-master/",
+    "https://hodgdonpowderco.com/wp-content/uploads/2024/08/Copy-of-2024-Smokeless-Relative-Burn-Rate-Chart-WEBSITE.pdf"
+   ]
+  },
+  {
+   "id": "223",
+   "name": ".223 Remington (and 5.56x45mm NATO)",
+   "bulletDiameter": 0.224,
+   "maxCaseLength": 1.76,
+   "trimLength": 1.75,
+   "maxCOAL": 2.26,
+   "maxPressurePsi": 55000,
+   "primerSize": "small rifle",
+   "typicalTwist": "1:12 (SAAMI .223 Rem); AR-15/5.56 barrels commonly 1:7 to 1:9. Heavy bullets (75-80+ gr) generally need 1:8 or faster (Sierra: 77 gr SMK requires 1:8 or faster)",
+   "notes": "5.56 NATO uses the same external case dimensions but a longer freebore/leade and is loaded to higher pressure measured by a different method (NATO EPVAT, not directly comparable to SAAMI's 55,000 psi). Firing 5.56 loads in a .223-only chamber can over-pressure; .223 in a 5.56 chamber is fine. Load to .223 data unless your manual has specific 5.56 data and your chamber is 5.56/.223 Wylde. Military (e.g., Lake City) brass has crimped primer pockets that must be swaged/reamed and often slightly less capacity. For ARs many use harder-cup primers (CCI 450, CCI #41, Federal GM205MAVS) to reduce slam-fire/pierce risk. Mag length limits COAL to ~2.260 in for AR mags; long heavy bullets may need single-feeding. Trim when cases exceed 1.760.",
+   "commonPowders": [
+    "Hodgdon H335",
+    "Hodgdon BL-C(2)",
+    "Hodgdon CFE 223",
+    "Hodgdon Varget",
+    "Hodgdon H4895",
+    "Hodgdon Benchmark",
+    "Hodgdon H322",
+    "IMR 8208 XBR",
+    "IMR 4895",
+    "IMR 4166",
+    "Ramshot TAC",
+    "Ramshot X-Terminator",
+    "Alliant AR Comp",
+    "Alliant Reloder 15",
+    "Alliant Power Pro Varmint",
+    "Vihtavuori N140",
+    "Vihtavuori N540",
+    "Winchester StaBALL Match",
+    "Winchester 748",
+    "Accurate 2230",
+    "Accurate 2460"
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/.223_Remington",
+    "https://www.letsgoshooting.org/resources/articles/firearms/understanding-223-vs-5-56-are-they-interchangeable/",
+    "https://www.outdoorlife.com/guns/556-vs-223/",
+    "https://sierrabullets.com/22-cal-77-gr-hpbt-matchking-smk/",
+    "https://bergerbullets.com/information/lines-and-designs/bullet-reference-charts/",
+    "https://hodgdonpowderco.com/wp-content/uploads/2024/08/Copy-of-2024-Smokeless-Relative-Burn-Rate-Chart-WEBSITE.pdf"
+   ]
+  },
+  {
+   "id": "7prc",
+   "name": "7mm PRC (Precision Rifle Cartridge)",
+   "bulletDiameter": 0.284,
+   "maxCaseLength": 2.28,
+   "trimLength": 2.26,
+   "maxCOAL": 3.34,
+   "maxPressurePsi": 65000,
+   "primerSize": "large rifle magnum",
+   "typicalTwist": "1:8 (SAAMI); Hornady has said 1:8.5 also works",
+   "notes": "Belt-less magnum on a .532 in case head (same as the other PRCs/.300 RUM family), 30-degree shoulder, designed for long heavy bullets (175-195 gr) in a long action at 3.340 in max COAL; longer is possible if your magazine/throat allow. Large Rifle MAGNUM primers are recommended (Rifle Shooter/Hornady guidance: the large charges of slow magnum powder call for magnum ignition), e.g. Federal 215/215M, CCI 250, Winchester WLRM. Uses slow magnum powders. Gross water capacity of Hornady brass reported ~78-82 gr H2O depending on method. Trim-to is listed as 2.260 in by Rifle Shooter; check your manual. Brass is available from Hornady, Peterson, Nosler and Lapua (all large rifle primer pockets).",
+   "commonPowders": [
+    "Hodgdon H1000",
+    "Hodgdon Retumbo",
+    "Hodgdon H4831SC",
+    "Hodgdon H4350",
+    "Alliant Reloder 26",
+    "Alliant Reloder 23",
+    "Alliant Reloder 25",
+    "IMR 7977",
+    "IMR 8133",
+    "Ramshot Magnum",
+    "Ramshot LRT",
+    "Winchester StaBALL HD",
+    "Vihtavuori N565",
+    "Vihtavuori N568",
+    "Vihtavuori N570",
+    "Accurate MagPro"
+   ],
+   "sources": [
+    "https://www.rifleshootermag.com/editorial/handloading-the-7mm-prc/470401",
+    "https://hodgdonpowderco.com/articles/handloading-the-new-7mm-prc/",
+    "https://www.outdoorlife.com/guns/7mm-prc-tested-and-reviewed/",
+    "https://americanrifleman.org/content/7-mm-prc-hornady-s-new-precision-rifle-cartridge",
+    "https://ultimatereloader.com/2022/10/28/7mm-prc-reloading-what-youll-need/",
+    "https://hodgdonpowderco.com/wp-content/uploads/2024/08/Copy-of-2024-Smokeless-Relative-Burn-Rate-Chart-WEBSITE.pdf"
+   ]
+  }
+ ],
+ "bullets": [
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "name": "9mm .355 90 gr XTP (#35500)",
+   "weightGr": 90,
+   "type": "JHP (XTP)",
+   "g1": 0.099,
+   "g7": null,
+   "lengthIn": null,
+   "use": "defense"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "name": "9mm .355 115 gr XTP (#35540)",
+   "weightGr": 115,
+   "type": "JHP (XTP)",
+   "g1": 0.129,
+   "g7": null,
+   "lengthIn": null,
+   "use": "defense"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "name": "9mm .355 124 gr XTP (#35571)",
+   "weightGr": 124,
+   "type": "JHP (XTP)",
+   "g1": 0.165,
+   "g7": null,
+   "lengthIn": null,
+   "use": "defense"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "name": "9mm .355 147 gr XTP (#35580)",
+   "weightGr": 147,
+   "type": "JHP (XTP)",
+   "g1": 0.212,
+   "g7": null,
+   "lengthIn": null,
+   "use": "defense"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "name": "9mm .355 115 gr FMJ RN (#35557)",
+   "weightGr": 115,
+   "type": "FMJ",
+   "g1": 0.14,
+   "g7": null,
+   "lengthIn": null,
+   "use": "plinking"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "name": "9mm .355 124 gr FMJ RN (#355771)",
+   "weightGr": 124,
+   "type": "FMJ",
+   "g1": 0.145,
+   "g7": null,
+   "lengthIn": null,
+   "use": "plinking"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "name": "9mm .355 147 gr FMJ RN (#35597B)",
+   "weightGr": 147,
+   "type": "FMJ",
+   "g1": 0.212,
+   "g7": null,
+   "lengthIn": null,
+   "use": "plinking"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "name": "9mm .355 115 gr HAP (#355281)",
+   "weightGr": 115,
+   "type": "HAP (match hollow point)",
+   "g1": 0.129,
+   "g7": null,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "name": "9mm .356 125 gr HAP (#355721)",
+   "weightGr": 125,
+   "type": "HAP (match hollow point)",
+   "g1": 0.158,
+   "g7": null,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Sierra",
+   "name": "9mm 115 gr FMJ Tournament Master (#8115)",
+   "weightGr": 115,
+   "type": "FMJ",
+   "g1": 0.107,
+   "g7": null,
+   "lengthIn": null,
+   "use": "plinking"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Sierra",
+   "name": "9mm 125 gr FMJ Tournament Master (#8120)",
+   "weightGr": 125,
+   "type": "FMJ",
+   "g1": 0.115,
+   "g7": null,
+   "lengthIn": null,
+   "use": "plinking"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Sierra",
+   "name": "9mm 115 gr JHP Sports Master (#8110)",
+   "weightGr": 115,
+   "type": "JHP",
+   "g1": 0.127,
+   "g7": null,
+   "lengthIn": null,
+   "use": "defense"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Sierra",
+   "name": "9mm 124 gr JHP Sports Master (#8124)",
+   "weightGr": 124,
+   "type": "JHP",
+   "g1": 0.125,
+   "g7": null,
+   "lengthIn": null,
+   "use": "defense"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Sierra",
+   "name": "9mm 147 gr JHP Sports Master (#8147)",
+   "weightGr": 147,
+   "type": "JHP",
+   "g1": 0.157,
+   "g7": null,
+   "lengthIn": null,
+   "use": "defense"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Sierra",
+   "name": "9mm 124 gr JHP V-Crown (#9924)",
+   "weightGr": 124,
+   "type": "JHP",
+   "g1": 0.12,
+   "g7": null,
+   "lengthIn": null,
+   "use": "defense"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Sierra",
+   "name": "9mm 147 gr JHP V-Crown (#9947)",
+   "weightGr": 147,
+   "type": "JHP",
+   "g1": 0.162,
+   "g7": null,
+   "lengthIn": null,
+   "use": "defense"
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Nosler",
+   "name": "9mm 124 gr JHP (ASP)",
+   "weightGr": 124,
+   "type": "JHP",
+   "g1": 0.118,
+   "g7": null,
+   "lengthIn": 0.56,
+   "use": "defense"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "name": "22 Cal .224 55 gr FMJ-BT w/ cannelure (#2267)",
+   "weightGr": 55,
+   "type": "FMJ-BT",
+   "g1": 0.243,
+   "g7": null,
+   "lengthIn": null,
+   "use": "plinking"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "name": "22 Cal .224 62 gr FMJ (#22760B)",
+   "weightGr": 62,
+   "type": "FMJ",
+   "g1": 0.274,
+   "g7": null,
+   "lengthIn": null,
+   "use": "plinking"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "name": "22 Cal .224 55 gr V-MAX (#22271)",
+   "weightGr": 55,
+   "type": "V-MAX (polymer tip)",
+   "g1": 0.255,
+   "g7": null,
+   "lengthIn": null,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "name": "22 Cal .224 68 gr BTHP Match (#2278)",
+   "weightGr": 68,
+   "type": "HPBT",
+   "g1": 0.355,
+   "g7": null,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "name": "22 Cal .224 75 gr BTHP Match (#2279)",
+   "weightGr": 75,
+   "type": "HPBT",
+   "g1": 0.395,
+   "g7": null,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "name": "22 Cal 73 gr ELD Match",
+   "weightGr": 73,
+   "type": "ELD-M",
+   "g1": 0.398,
+   "g7": 0.2,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "name": "22 Cal 75 gr ELD Match",
+   "weightGr": 75,
+   "type": "ELD-M",
+   "g1": 0.467,
+   "g7": 0.235,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "name": "22 Cal 80 gr ELD Match",
+   "weightGr": 80,
+   "type": "ELD-M",
+   "g1": 0.485,
+   "g7": 0.244,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "name": "22 Cal 62 gr ELD-VT",
+   "weightGr": 62,
+   "type": "ELD-VT (polymer tip varmint)",
+   "g1": 0.395,
+   "g7": 0.199,
+   "lengthIn": null,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Sierra",
+   "name": "22 Cal 52 gr HPBT MatchKing (#1410)",
+   "weightGr": 52,
+   "type": "HPBT",
+   "g1": 0.225,
+   "g7": 0.11,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Sierra",
+   "name": "22 Cal 55 gr FMJBT GameKing (#1355)",
+   "weightGr": 55,
+   "type": "FMJ-BT",
+   "g1": 0.272,
+   "g7": 0.122,
+   "lengthIn": null,
+   "use": "plinking"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Sierra",
+   "name": "22 Cal 55 gr Tipped VarmintKing (#1455)",
+   "weightGr": 55,
+   "type": "Polymer tip",
+   "g1": 0.271,
+   "g7": 0.124,
+   "lengthIn": null,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Sierra",
+   "name": "22 Cal 69 gr HPBT MatchKing (#1380)",
+   "weightGr": 69,
+   "type": "HPBT",
+   "g1": 0.341,
+   "g7": 0.167,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Sierra",
+   "name": "22 Cal 69 gr Tipped MatchKing (#7169)",
+   "weightGr": 69,
+   "type": "TMK (tipped match)",
+   "g1": 0.375,
+   "g7": 0.178,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Sierra",
+   "name": "22 Cal 77 gr HPBT MatchKing (#9377)",
+   "weightGr": 77,
+   "type": "HPBT",
+   "g1": 0.372,
+   "g7": 0.182,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Sierra",
+   "name": "22 Cal 77 gr Tipped MatchKing (#7177)",
+   "weightGr": 77,
+   "type": "TMK (tipped match)",
+   "g1": 0.42,
+   "g7": 0.207,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Sierra",
+   "name": "22 Cal 80 gr HPBT-CN MatchKing (#9390)",
+   "weightGr": 80,
+   "type": "HPBT",
+   "g1": 0.461,
+   "g7": 0.229,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Berger",
+   "name": "22 Cal 55 gr FB Varmint (#22311)",
+   "weightGr": 55,
+   "type": "FB HP varmint",
+   "g1": 0.209,
+   "g7": null,
+   "lengthIn": 0.753,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Berger",
+   "name": "22 Cal 73 gr BT Target (#22420)",
+   "weightGr": 73,
+   "type": "HPBT",
+   "g1": 0.348,
+   "g7": 0.178,
+   "lengthIn": 0.963,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Berger",
+   "name": "22 Cal 75 gr VLD Target (#22421)",
+   "weightGr": 75,
+   "type": "VLD (HPBT)",
+   "g1": 0.421,
+   "g7": 0.216,
+   "lengthIn": 1.051,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Berger",
+   "name": "22 Cal 77 gr OTM Tactical (#22101)",
+   "weightGr": 77,
+   "type": "OTM (HPBT)",
+   "g1": 0.374,
+   "g7": 0.192,
+   "lengthIn": 1.015,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Berger",
+   "name": "22 Cal 80.5 gr FULLBORE Target (#22427)",
+   "weightGr": 80.5,
+   "type": "HPBT",
+   "g1": 0.441,
+   "g7": 0.226,
+   "lengthIn": 1.091,
+   "use": "match"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Nosler",
+   "name": "22 Cal 55 gr Ballistic Tip Varmint",
+   "weightGr": 55,
+   "type": "Polymer tip",
+   "g1": 0.267,
+   "g7": null,
+   "lengthIn": 0.81,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "223",
+   "maker": "Nosler",
+   "name": "22 Cal 77 gr HPBT Custom Competition",
+   "weightGr": 77,
+   "type": "HPBT",
+   "g1": 0.34,
+   "g7": null,
+   "lengthIn": 0.98,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Hornady",
+   "name": "7mm 162 gr ELD Match",
+   "weightGr": 162,
+   "type": "ELD-M",
+   "g1": 0.67,
+   "g7": 0.338,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Hornady",
+   "name": "7mm 180 gr ELD Match (1:8.75 twist value; 0.816/0.411 at 1:7.5)",
+   "weightGr": 180,
+   "type": "ELD-M",
+   "g1": 0.777,
+   "g7": 0.391,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Hornady",
+   "name": "7mm 150 gr ELD-X",
+   "weightGr": 150,
+   "type": "ELD-X",
+   "g1": 0.574,
+   "g7": 0.289,
+   "lengthIn": null,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Hornady",
+   "name": "7mm 162 gr ELD-X",
+   "weightGr": 162,
+   "type": "ELD-X",
+   "g1": 0.631,
+   "g7": 0.318,
+   "lengthIn": null,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Hornady",
+   "name": "7mm 175 gr ELD-X",
+   "weightGr": 175,
+   "type": "ELD-X",
+   "g1": 0.689,
+   "g7": 0.347,
+   "lengthIn": null,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Hornady",
+   "name": "7mm 166 gr A-Tip Match",
+   "weightGr": 166,
+   "type": "A-Tip (aluminum tip match)",
+   "g1": 0.664,
+   "g7": 0.332,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Hornady",
+   "name": "7mm 190 gr A-Tip Match",
+   "weightGr": 190,
+   "type": "A-Tip (aluminum tip match)",
+   "g1": 0.838,
+   "g7": 0.422,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Berger",
+   "name": "7mm 168 gr VLD Hunting (#28501)",
+   "weightGr": 168,
+   "type": "VLD Hunting",
+   "g1": 0.618,
+   "g7": 0.316,
+   "lengthIn": 1.433,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Berger",
+   "name": "7mm 175 gr Elite Hunter (#28554)",
+   "weightGr": 175,
+   "type": "Elite Hunter (hybrid)",
+   "g1": 0.656,
+   "g7": 0.336,
+   "lengthIn": 1.502,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Berger",
+   "name": "7mm 180 gr Hybrid Target (#28407)",
+   "weightGr": 180,
+   "type": "Hybrid Target (HPBT)",
+   "g1": 0.68,
+   "g7": 0.349,
+   "lengthIn": 1.527,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Berger",
+   "name": "7mm 180 gr VLD Hunting (#28502)",
+   "weightGr": 180,
+   "type": "VLD Hunting",
+   "g1": 0.673,
+   "g7": 0.345,
+   "lengthIn": 1.506,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Berger",
+   "name": "7mm 184 gr F-Open Hybrid Target (#28408)",
+   "weightGr": 184,
+   "type": "Hybrid Target (HPBT)",
+   "g1": 0.695,
+   "g7": 0.356,
+   "lengthIn": 1.575,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Berger",
+   "name": "7mm 190 gr Long Range Hybrid Target (#28487)",
+   "weightGr": 190,
+   "type": "LR Hybrid Target (HPBT)",
+   "g1": 0.751,
+   "g7": 0.384,
+   "lengthIn": 1.601,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Berger",
+   "name": "7mm 195 gr EOL Elite Hunter (#28550)",
+   "weightGr": 195,
+   "type": "Elite Hunter (hybrid)",
+   "g1": 0.755,
+   "g7": 0.387,
+   "lengthIn": 1.648,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Sierra",
+   "name": "7mm 175 gr HPBT MatchKing (#1975)",
+   "weightGr": 175,
+   "type": "HPBT",
+   "g1": 0.608,
+   "g7": 0.302,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Sierra",
+   "name": "7mm 180 gr HPBT-CN MatchKing, optimized for 7 PRC (#1981)",
+   "weightGr": 180,
+   "type": "HPBT",
+   "g1": 0.676,
+   "g7": 0.335,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Sierra",
+   "name": "7mm 183 gr HPBT-CN MatchKing (#1983)",
+   "weightGr": 183,
+   "type": "HPBT",
+   "g1": 0.707,
+   "g7": 0.351,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Sierra",
+   "name": "7mm 185 gr Tipped MatchKing (#7685)",
+   "weightGr": 185,
+   "type": "TMK (tipped match)",
+   "g1": 0.685,
+   "g7": 0.346,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Sierra",
+   "name": "7mm 197 gr HPBT-CN MatchKing (#1997)",
+   "weightGr": 197,
+   "type": "HPBT",
+   "g1": 0.78,
+   "g7": 0.385,
+   "lengthIn": null,
+   "use": "match"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Sierra",
+   "name": "7mm 165 gr Tipped GameKing (#4565)",
+   "weightGr": 165,
+   "type": "TGK (tipped hunting)",
+   "g1": 0.61,
+   "g7": 0.275,
+   "lengthIn": null,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Sierra",
+   "name": "7mm 180 gr Tipped GameKing (#4580)",
+   "weightGr": 180,
+   "type": "TGK (tipped hunting)",
+   "g1": 0.632,
+   "g7": 0.305,
+   "lengthIn": null,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Nosler",
+   "name": "7mm 168 gr AccuBond Long Range",
+   "weightGr": 168,
+   "type": "AccuBond LR (bonded, polymer tip)",
+   "g1": 0.616,
+   "g7": 0.31,
+   "lengthIn": 1.5,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Nosler",
+   "name": "7mm 175 gr AccuBond Long Range",
+   "weightGr": 175,
+   "type": "AccuBond LR (bonded, polymer tip)",
+   "g1": 0.648,
+   "g7": 0.326,
+   "lengthIn": 1.54,
+   "use": "hunting"
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Nosler",
+   "name": "7mm 160 gr Partition",
+   "weightGr": 160,
+   "type": "Partition",
+   "g1": 0.475,
+   "g7": null,
+   "lengthIn": 1.27,
+   "use": "hunting"
+  }
+ ],
+ "powders": [
+  {
+   "name": "Bullseye",
+   "maker": "Alliant",
+   "type": "flake",
+   "burnRank": 14,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Very fast pistol powder; small charges, easy to double-charge, inspect every case. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Titegroup",
+   "maker": "Hodgdon",
+   "type": null,
+   "burnRank": 17,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Fast, low charge weight, position-insensitive in the case; easy to double-charge. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Sport Pistol",
+   "maker": "Alliant",
+   "type": null,
+   "burnRank": 15,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Fast powder aimed at 9mm/.40/.45 target loads. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Accurate No. 2",
+   "maker": "Accurate",
+   "type": null,
+   "burnRank": 26,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Fast pistol powder. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "HP-38",
+   "maker": "Hodgdon",
+   "type": "ball",
+   "burnRank": 28,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Same burn position as Winchester 231 on the Hodgdon chart; meters well. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "231",
+   "maker": "Winchester",
+   "type": "ball",
+   "burnRank": 29,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Classic 9mm target/standard powder; meters well. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Unique",
+   "maker": "Alliant",
+   "type": "flake",
+   "burnRank": 33,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Versatile medium-burn flake; bulky. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Universal",
+   "maker": "Hodgdon",
+   "type": "flake",
+   "burnRank": 34,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Versatile medium-burn handgun powder. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Power Pistol",
+   "maker": "Alliant",
+   "type": "flake",
+   "burnRank": 35,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Higher-velocity 9mm loads; can be flashy. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "N320",
+   "maker": "Vihtavuori",
+   "type": "extruded",
+   "burnRank": 25,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Fine-grain extruded pistol powder; clean burning. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "N340",
+   "maker": "Vihtavuori",
+   "type": "extruded",
+   "burnRank": 39,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Medium-burn extruded pistol powder. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "HS-6",
+   "maker": "Hodgdon",
+   "type": "ball",
+   "burnRank": 42,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Slower ball powder for full-power 9mm/+P; good case fill. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "AutoComp",
+   "maker": "Winchester",
+   "type": "ball",
+   "burnRank": 43,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Developed for compensated/major-power pistols. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "CFE Pistol",
+   "maker": "Hodgdon",
+   "type": "ball",
+   "burnRank": 44,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Contains Copper Fouling Eraser; meters well. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "True Blue",
+   "maker": "Ramshot",
+   "type": "ball",
+   "burnRank": 45,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Ramshot powders are double-base spherical. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Silhouette",
+   "maker": "Ramshot",
+   "type": "ball",
+   "burnRank": 46,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Slower pistol ball powder suited to 9mm. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "No. 5",
+   "maker": "Accurate",
+   "type": "ball",
+   "burnRank": 41,
+   "cartridges": [
+    "9mm"
+   ],
+   "notes": "Spherical, meters very well. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "H322",
+   "maker": "Hodgdon",
+   "type": "extruded",
+   "burnRank": 85,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Hodgdon Extreme series, marketed as temperature-insensitive. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Benchmark",
+   "maker": "Hodgdon",
+   "type": "extruded",
+   "burnRank": 90,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Hodgdon Extreme series, marketed as temperature-insensitive. Popular with lighter .223 bullets. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "H335",
+   "maker": "Hodgdon",
+   "type": "ball",
+   "burnRank": 91,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Spherical; meters well; mil-surplus WC844 is similar; popular for 55-62 gr in ARs. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "X-Terminator",
+   "maker": "Ramshot",
+   "type": "ball",
+   "burnRank": 92,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Spherical; good for light/varmint bullets in .223. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "2230",
+   "maker": "Accurate",
+   "type": "ball",
+   "burnRank": 93,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Spherical, meters well in progressive presses. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "2460",
+   "maker": "Accurate",
+   "type": "ball",
+   "burnRank": 94,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Spherical. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "8208 XBR",
+   "maker": "IMR",
+   "type": "extruded",
+   "burnRank": 95,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Short-cut extruded; marketed as temperature-insensitive; meters well for an extruded powder. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "AR Comp",
+   "maker": "Alliant",
+   "type": "extruded",
+   "burnRank": 96,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Designed for gas-gun cartridges; marketed as temperature-stable. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "TAC",
+   "maker": "Ramshot",
+   "type": "ball",
+   "burnRank": 97,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Spherical; popular for .223/5.56 with 55-77 gr bullets. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Power Pro Varmint",
+   "maker": "Alliant",
+   "type": "ball",
+   "burnRank": 98,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Spherical, high energy. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "H4895",
+   "maker": "Hodgdon",
+   "type": "extruded",
+   "burnRank": 99,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Hodgdon Extreme series, marketed as temperature-insensitive. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "N530",
+   "maker": "Vihtavuori",
+   "type": "extruded",
+   "burnRank": 100,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Vihtavuori N500-series high-energy powder. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "IMR 4895",
+   "maker": "IMR",
+   "type": "extruded",
+   "burnRank": 101,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Classic extruded powder. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "IMR 4166",
+   "maker": "IMR",
+   "type": "extruded",
+   "burnRank": 105,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "IMR Enduron line: marketed as temperature-stable with copper-fouling reducer. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Reloder 15",
+   "maker": "Alliant",
+   "type": "extruded",
+   "burnRank": 110,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Extruded; good with heavy .223 match bullets. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "N140",
+   "maker": "Vihtavuori",
+   "type": "extruded",
+   "burnRank": 112,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Popular for heavy .223 match bullets. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Varget",
+   "maker": "Hodgdon",
+   "type": "extruded",
+   "burnRank": 113,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Hodgdon Extreme series, marketed as temperature-insensitive. Popular for 69-80 gr .223 match loads. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "748",
+   "maker": "Winchester",
+   "type": "ball",
+   "burnRank": 114,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Spherical; meters well. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "StaBALL Match",
+   "maker": "Winchester",
+   "type": "ball",
+   "burnRank": 115,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Spherical; marketed as temperature-stable. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "BL-C(2)",
+   "maker": "Hodgdon",
+   "type": "ball",
+   "burnRank": 116,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Spherical; long-time .223 standard. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "N540",
+   "maker": "Vihtavuori",
+   "type": "extruded",
+   "burnRank": 117,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "N500 series high-energy version of N140 burn range. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "CFE 223",
+   "maker": "Hodgdon",
+   "type": "ball",
+   "burnRank": 118,
+   "cartridges": [
+    "223"
+   ],
+   "notes": "Contains Copper Fouling Eraser; popular in ARs, meters well. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "H4350",
+   "maker": "Hodgdon",
+   "type": "extruded",
+   "burnRank": 133,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Hodgdon Extreme series, marketed as temperature-insensitive. Generally for lighter bullets in 7 PRC. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "H4831SC",
+   "maker": "Hodgdon",
+   "type": "extruded",
+   "burnRank": 146,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Hodgdon Extreme series, marketed as temperature-insensitive. Short-cut version of H4831 (same chart position). Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Reloder 22",
+   "maker": "Alliant",
+   "type": "extruded",
+   "burnRank": 150,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Magnum-burn extruded. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Reloder 23",
+   "maker": "Alliant",
+   "type": "extruded",
+   "burnRank": 152,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Marketed with Alliant TZ temperature-zero technology. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Reloder 25",
+   "maker": "Alliant",
+   "type": "extruded",
+   "burnRank": 155,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Slow magnum powder. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "N565",
+   "maker": "Vihtavuori",
+   "type": "extruded",
+   "burnRank": 156,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "N500 series high-energy. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "MagPro",
+   "maker": "Accurate",
+   "type": "ball",
+   "burnRank": 158,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Spherical magnum powder. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "IMR 7977",
+   "maker": "IMR",
+   "type": "extruded",
+   "burnRank": 159,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "IMR Enduron line: marketed as temperature-stable with copper-fouling reducer. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Reloder 26",
+   "maker": "Alliant",
+   "type": "extruded",
+   "burnRank": 160,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Suggested by Hornady technicians for 7 PRC (per Rifle Shooter). Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "H1000",
+   "maker": "Hodgdon",
+   "type": "extruded",
+   "burnRank": 161,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Hodgdon Extreme series, marketed as temperature-insensitive. One of the most popular 7 PRC powders; suggested by Hornady. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Magnum",
+   "maker": "Ramshot",
+   "type": "ball",
+   "burnRank": 163,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Spherical; Hodgdon noted very consistent metering in 7 PRC. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "Retumbo",
+   "maker": "Hodgdon",
+   "type": "extruded",
+   "burnRank": 165,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Hodgdon Extreme series, marketed as temperature-insensitive. Very slow; heavy bullets. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "StaBALL HD",
+   "maker": "Winchester",
+   "type": "ball",
+   "burnRank": 166,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Spherical; Hodgdon's ballistician called it a standout with heavy 7 PRC bullets. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "IMR 8133",
+   "maker": "IMR",
+   "type": "extruded",
+   "burnRank": 167,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "IMR Enduron line: marketed as temperature-stable with copper-fouling reducer. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "N568",
+   "maker": "Vihtavuori",
+   "type": "extruded",
+   "burnRank": 168,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "N500 series high-energy. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "LRT",
+   "maker": "Ramshot",
+   "type": "ball",
+   "burnRank": 169,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Spherical; Hodgdon article noted it did well with heavy 7 PRC bullets. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  },
+  {
+   "name": "N570",
+   "maker": "Vihtavuori",
+   "type": "extruded",
+   "burnRank": 170,
+   "cartridges": [
+    "7prc"
+   ],
+   "notes": "Very slow; heavy bullets. Burn rank = position on Hodgdon July 2024 relative burn rate chart (1 = fastest of 176)."
+  }
+ ],
+ "primers": [
+  {
+   "maker": "CCI",
+   "name": "Small Pistol",
+   "model": "CCI 500",
+   "size": "small pistol",
+   "notes": "Standard small pistol; common 9mm choice. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "CCI",
+   "name": "Small Pistol Magnum",
+   "model": "CCI 550",
+   "size": "small pistol magnum",
+   "notes": "Magnum small pistol; used with slow ball powders/+P per manual. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Federal",
+   "name": "Small Pistol",
+   "model": "Federal 100",
+   "size": "small pistol",
+   "notes": "Federal cups are softer; good for light striker/hammer springs. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Federal",
+   "name": "Gold Medal Small Pistol Match",
+   "model": "Federal GM100M",
+   "size": "small pistol",
+   "notes": "Match version of Federal 100. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Winchester",
+   "name": "Small Pistol",
+   "model": "Winchester WSP",
+   "size": "small pistol",
+   "notes": "Standard small pistol. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Remington",
+   "name": "Small Pistol",
+   "model": "Remington 1 1/2",
+   "size": "small pistol",
+   "notes": "Standard small pistol. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "CCI",
+   "name": "Small Rifle",
+   "model": "CCI 400",
+   "size": "small rifle",
+   "notes": "Standard small rifle. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "CCI",
+   "name": "Small Rifle Magnum",
+   "model": "CCI 450",
+   "size": "small rifle magnum",
+   "notes": "Thicker cup; popular in ARs/5.56 for pierce and slam-fire resistance; changes ignition vs CCI 400, so work up again when swapping. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "CCI",
+   "name": "Military Small Rifle",
+   "model": "CCI #41",
+   "size": "small rifle",
+   "notes": "Mil-spec-style primer for 5.56 NATO; harder cup/less sensitive, for floating-firing-pin rifles (AR-15). Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "CCI",
+   "name": "Bench Rest Small Rifle",
+   "model": "CCI BR4",
+   "size": "small rifle",
+   "notes": "Benchrest-grade small rifle. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Federal",
+   "name": "Small Rifle",
+   "model": "Federal 205",
+   "size": "small rifle",
+   "notes": "Standard small rifle. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Federal",
+   "name": "Gold Medal Small Rifle Match",
+   "model": "Federal GM205M",
+   "size": "small rifle",
+   "notes": "Match grade; popular for bolt-gun .223. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Federal",
+   "name": "Gold Medal Small Rifle Match AR",
+   "model": "Federal GM205MAVS",
+   "size": "small rifle",
+   "notes": "AR-specific match primer with tougher cup for semi-autos. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Winchester",
+   "name": "Small Rifle",
+   "model": "Winchester WSR",
+   "size": "small rifle",
+   "notes": "Winchester rates it for standard and magnum small rifle use. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Remington",
+   "name": "Small Rifle Bench Rest",
+   "model": "Remington 7 1/2",
+   "size": "small rifle",
+   "notes": "Thicker cup than Remington 6 1/2; popular for .223. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "CCI",
+   "name": "Large Rifle",
+   "model": "CCI 200",
+   "size": "large rifle",
+   "notes": "Standard large rifle. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "CCI",
+   "name": "Large Rifle Magnum",
+   "model": "CCI 250",
+   "size": "large rifle magnum",
+   "notes": "Magnum large rifle; suitable for 7 PRC. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Federal",
+   "name": "Large Rifle",
+   "model": "Federal 210",
+   "size": "large rifle",
+   "notes": "Standard large rifle. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Federal",
+   "name": "Large Rifle Magnum",
+   "model": "Federal 215",
+   "size": "large rifle magnum",
+   "notes": "Magnum large rifle; suitable for 7 PRC. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Federal",
+   "name": "Gold Medal Large Rifle Magnum Match",
+   "model": "Federal GM215M",
+   "size": "large rifle magnum",
+   "notes": "Match magnum; used in Rifle Shooter's 7 PRC testing. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Winchester",
+   "name": "Large Rifle Magnum",
+   "model": "Winchester WLRM",
+   "size": "large rifle magnum",
+   "notes": "Magnum large rifle. Changing primer brand/type is a component change: back off and work up per your manual."
+  },
+  {
+   "maker": "Remington",
+   "name": "Large Rifle Magnum",
+   "model": "Remington 9 1/2M",
+   "size": "large rifle magnum",
+   "notes": "Magnum large rifle. Changing primer brand/type is a component change: back off and work up per your manual."
+  }
+ ],
+ "cases": [
+  {
+   "cartridge": "9mm",
+   "maker": "Starline",
+   "notes": "New unprimed brass, boxer primed; Starline also sells 9mm +P headstamped brass (same as standard except headstamp).",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Hornady",
+   "notes": "Unprimed 9mm Luger brass.",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "9mm",
+   "maker": "Federal / Speer / Winchester / Remington (once-fired range brass)",
+   "notes": "Common reloadable range pickup; sort out Berdan, steel and aluminum (e.g. some Blazer) cases which are not reloadable; watch for crimped military primer pockets.",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "223",
+   "maker": "Lapua",
+   "notes": "Premium brass; small rifle primer pocket (all .223 uses small rifle primers). Tight tolerances, long life.",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "223",
+   "maker": "Starline",
+   "notes": "Sells both .223 Rem and 5.56 NATO headstamps; Starline says its brass is safe in either chamber when loaded to .223 pressures.",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "223",
+   "maker": "Hornady",
+   "notes": "Unprimed .223 Rem brass; Hornady also offers 5.56 match brass.",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "223",
+   "maker": "Lake City (military, once-fired)",
+   "notes": "Crimped primer pockets must be swaged/reamed before repriming; often slightly thicker/heavier, lower capacity: reduce charges when switching from commercial brass.",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "223",
+   "maker": "Winchester / Federal / Remington",
+   "notes": "Commercial brass; capacity varies by maker, so keep lots separate.",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Hornady",
+   "notes": "Original/reference 7 PRC brass; large rifle primer pocket. Gross water capacity measured ~80.4 gr (Hodgdon/Rifle Shooter test, primed, to brim); other tests report ~78-82 gr.",
+   "approxCapacityGrH2O": 80.4
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Peterson",
+   "notes": "Large rifle primer (LRP) pocket version available; capacity not published.",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Nosler",
+   "notes": "Nosler Premium 7mm PRC brass (#17890).",
+   "approxCapacityGrH2O": null
+  },
+  {
+   "cartridge": "7prc",
+   "maker": "Lapua",
+   "notes": "Added in 2025; large rifle primer pocket.",
+   "approxCapacityGrH2O": null
+  }
+ ]
+}
