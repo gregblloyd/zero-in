@@ -88,7 +88,7 @@ const turnLong = t => t === 'ccw' ? 'counter‑clockwise, like opening a jar' : 
 function rotSvg(t) {
   // circular arrow; mirrored for clockwise
   return `<svg viewBox="0 0 48 48" style="${t === 'cw' ? 'transform:scaleX(-1)' : ''}" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M36 12A16 16 0 1 0 40 26"/><path d="M36 3v9h-9"/></svg>`;
+    <path d="M40 24A16 16 0 1 0 24 40"/><path d="M16 32l8 8-8 8"/></svg>`;
 }
 
 // ---------- routing ----------
@@ -234,10 +234,12 @@ function arrowSvg(dir) {
 }
 function quickHtml(c) {
   if (!c) return '';
-  const r = rifle();
-  const part = (k, ax, x) => { if (x.clicks === 0) return `<span><small>${k}</small><b>✓ leave it</b></span>`;
-    const t = turnDir(r, ax, x.dir); return `<span><small>${k}</small><b>${t === 'ccw' ? '⟲' : '⟳'} ${turnWord(t)} ${Math.abs(x.clicks)}</b></span>`; };
-  return `<div class="quick">${part('TOP TURRET', 'elev', c.elev)}${part('SIDE TURRET', 'wind', c.wind)}</div>`;
+  const r = rifle(), u = r.unit === 'MIL' ? 'MIL' : 'MOA', upi = unitsPerInch(r, dist, distUnit);
+  const ar = { UP: '▲', DOWN: '▼', LEFT: '◀', RIGHT: '▶' };
+  const part = (ax, x) => { if (x.clicks === 0) return `<span><small>${ax === 'elev' ? 'ELEVATION' : 'WINDAGE'}</small><b>✓ good</b><small>no change</small></span>`;
+    const t = turnDir(r, ax, x.dir);
+    return `<span><small>${ar[x.dir]} ${x.dir}</small><b>${f(Math.abs(x.inches * upi), 2)} ${u}</b><small>turn ${turnWord(t).toLowerCase()} ${Math.abs(x.clicks)} clicks</small></span>`; };
+  return `<div class="quick">${part('elev', c.elev)}${part('wind', c.wind)}</div>`;
 }
 function answerHtml(r, st, corr) {
   if (!corr) return `<div class="card empty">${zeroMode === 'tap' ? 'Shoot a 3‑shot group at the center, then tap each hole.' : 'Enter how far the group center is from the bullseye.'}</div>`;
@@ -246,22 +248,24 @@ function answerHtml(r, st, corr) {
   const zeroed = corr.elev.clicks === 0 && corr.wind.clicks === 0;
   const card = (ax, c, label) => {
     const ok = c.clicks === 0;
-    return `<div class="dial ${ok ? 'ok' : ''}">
+    if (ok) return `<div class="dial ok"><div class="k">${label}</div><div class="clicks" style="color:var(--good)">✓</div><div class="dir" style="font-size:18px">No change</div><div class="sub num">${f(Math.abs(c.inches * upi), 2)} ${u} · under 1 click</div></div>`;
+    const t = turnDir(r, ax, c.dir);
+    return `<div class="dial">
       <div class="k">${label}</div>
-      ${ok ? `<div class="clicks" style="color:var(--good)">✓</div><div class="dir" style="font-size:18px">No change</div>` :
-      (() => { const t = turnDir(r, ax, c.dir); return `${rotSvg(t)}<div class="dir">TURN ${turnWord(t)}</div><div class="clicks num">${Math.abs(c.clicks)}</div><div class="dir" style="font-size:15px">clicks</div>
-      <div class="sub" style="margin-top:6px">${t === 'ccw' ? 'counter‑clockwise' : 'clockwise'}</div>`; })()}
-      <div class="sub num" style="margin-top:6px">moves hits <b>${c.dir}</b> ${f(Math.abs(c.inches), 2)}"<br>${f(Math.abs(c.inches * upi), 2)} ${u} · exact ${f(Math.abs(c.exact), 1)} clicks</div>
+      <div class="dir">${arrowSvg(c.dir)}<span>${c.dir}</span></div>
+      <div class="clicks num">${f(Math.abs(c.inches * upi), 2)}</div>
+      <div class="unit">${u}</div>
+      <div class="turn">${rotSvg(t)}<span>turn ${turnWord(t).toLowerCase()} <b class="num">${Math.abs(c.clicks)}</b> clicks</span></div>
+      <div class="sub num">${f(Math.abs(c.inches), 2)}" at ${dist} ${distUnit}</div>
     </div>`;
   };
   return `
     ${zeroed ? `<div class="card" style="border-color:var(--good);text-align:center"><b style="color:var(--good);font-size:20px">✓ ZEROED</b><div class="muted">Group center is within a click. Confirm with one more group, then set your turret caps to 0.</div></div>` : ''}
-    <div class="answer">${card('elev', corr.elev, 'TOP TURRET')}${card('wind', corr.wind, 'SIDE TURRET')}</div>
+    <div class="answer">${card('elev', corr.elev, 'ELEVATION')}${card('wind', corr.wind, 'WINDAGE')}</div>
     ${zeroed ? '' : `<div class="how">
-      ${corr.elev.clicks ? (() => { const t = turnDir(r, 'elev', corr.elev.dir); return `<div><b>Top turret (elevation):</b> look straight down at the cap and turn it <b>${turnWord(t)}</b> — ${turnLong(t)} — <b>${Math.abs(corr.elev.clicks)} clicks</b>. Your hits move ${corr.elev.dir.toLowerCase()}.</div>`; })() : ''}
-      ${corr.wind.clicks ? (() => { const t = turnDir(r, 'wind', corr.wind.dir); return `<div style="margin-top:8px"><b>Side turret (windage):</b> look at the cap from the right side of the rifle and turn it <b>${turnWord(t)}</b> — ${turnLong(t)} — <b>${Math.abs(corr.wind.clicks)} clicks</b>. Your hits move ${corr.wind.dir.toLowerCase()}.</div>`; })() : ''}
-      <div class="tiny" style="margin-top:10px">Keep the crosshair on the bullseye for the next group. The turret moves where the bullets land, not where you aim.
-      ${(r.elevTurn === 'ccw' || r.elevTurn === 'cw') ? '' : ' Double-check once: the UP arrow on your top cap should point counter‑clockwise (that\'s standard). If it points the other way, change it in Rifles → Edit → Turret direction.'}</div>
+      ${[['elev', 'Elevation', corr.elev], ['wind', 'Windage', corr.wind]].filter(x => x[2].clicks).map(([ax, name, c], i) => { const t = turnDir(r, ax, c.dir); const m = Math.abs(c.inches * upi);
+        return `<div style="${i ? 'margin-top:8px' : ''}"><b>${name}:</b> ${f(m, 2)} ${u} ${c.dir.toLowerCase()}. ${f(m, 2)} ÷ ${r.unit === 'MIL' ? r.click : fracMoa(r.click)} ${u} per click = ${f(Math.abs(c.exact), 1)} → <b>${Math.abs(c.clicks)} clicks</b>. Turn it <b>${turnWord(t).toLowerCase()}</b> (${t === 'ccw' ? 'counter‑clockwise' : 'clockwise'}).</div>`; }).join('')}
+      <div class="tiny" style="margin-top:10px">Keep the crosshair on the bullseye for the next group. The turret moves where the bullets land, not where you aim.</div>
     </div>`}
     ${st && st.n ? `<div class="card" style="margin-top:10px">
       <div class="stat"><span>Shots</span><span class="num">${st.n}</span></div>

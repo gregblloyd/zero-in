@@ -1,4 +1,4 @@
-const CACHE = 'zeroin-v5';
+const CACHE = 'zeroin-v7';
 const FILES = ['./', './index.html', './app.js', './data.json', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-180.png', './icon-32.png', './icon.svg'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
