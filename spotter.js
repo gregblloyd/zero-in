@@ -158,11 +158,14 @@ function updateSol() {
   const rev = num(b.revMoa);
   const revTxt = rev && eClicks * click > rev ? ` · ${Math.floor(eClicks * click / rev)} turn${Math.floor(eClicks * click / rev) > 1 ? 's' : ''} + ${Math.round((eClicks * click % rev) / click)}` : '';
   const holdWind = b.windMode !== 'dial';
+  const noWind = !(+c.windMph > 0);
+  const spinU = toU(-Math.atan(at.spinIn / 12 / (c.range * 3)) * 180 / Math.PI * 60); // + = correct right
+  const spinDir = at.spinIn >= 0 ? 'right' : 'left';
   const e5 = toU(per5);
   const energy = at.energy;
-  const call = `${eClicks ? `Dial ${niceMoa(Math.abs(elev), click)} ${eDir.toLowerCase()}` : 'Hold center'}. ${wClicks ? `${holdWind ? 'Hold' : 'Dial'} ${niceMoa(Math.abs(wind), click)} ${wDir.toLowerCase()}` : 'No wind hold'}. Send it.`;
+  const call = `${eClicks ? `Dial ${niceMoa(Math.abs(elev), click)} ${eDir.toLowerCase()}` : 'Hold center'}. ${wClicks ? `${holdWind ? 'Hold' : 'Dial'} ${niceMoa(Math.abs(wind), click)} ${wDir.toLowerCase()}${noWind ? ' for spin drift' : ''}` : 'No wind hold'}. Send it.`;
   const q = $('#spq');
-  if (q) q.innerHTML = `<span><small>DIAL ${eDir}</small><b>${niceMoa(Math.abs(elev), click)} ${u}</b><small>turn ${turnWord(eTurn).toLowerCase()} ${eClicks} clicks</small></span><span><small>${holdWind ? 'HOLD' : 'DIAL'} ${wDir}</small><b>${niceMoa(Math.abs(wind), click)} ${u}</b><small>${c.range} yd · ${c.windMph} mph @ ${c.windClock}</small></span>`;
+  if (q) q.innerHTML = `<span><small>DIAL ${eDir}</small><b>${niceMoa(Math.abs(elev), click)} ${u}</b><small>turn ${turnWord(eTurn).toLowerCase()} ${eClicks} clicks</small></span><span><small>${holdWind ? 'HOLD' : 'DIAL'} ${wDir}</small><b>${niceMoa(Math.abs(wind), click)} ${u}</b><small>${wClicks ? `turn ${turnWord(wTurn).toLowerCase()} ${wClicks} click${wClicks === 1 ? '' : 's'}` : 'no clicks'}${noWind ? ' · spin' : ''}</small></span>`;
   el.innerHTML = `
   <div class="sol">
     <div class="sol-call">“${call}”</div>
@@ -177,7 +180,8 @@ function updateSol() {
         <div class="k">WIND · ${holdWind ? 'HOLD' : 'DIAL'}</div>
         <div class="big num">${wDir === 'RIGHT' ? '▶' : '◀'} ${niceMoa(Math.abs(wind), click)}</div>
         <div class="u">${u} ${wDir}</div><div class="exact">exact ${f(Math.abs(wind), 2)}</div>
-        <div class="turn2">${holdWind ? `±${f(e5, 2)} ${u} per 5 mph` : `${rotSvg(wTurn)} turn ${turnWord(wTurn).toLowerCase()} <b>${wClicks}</b> clicks`}</div>
+        ${holdWind && wClicks ? '<div class="wnote" style="margin-top:8px;text-align:center">or to dial it:</div>' : ''}<div class="turn2${holdWind && wClicks ? ' tight' : ''}">${wClicks ? `${rotSvg(wTurn)} turn ${turnWord(wTurn).toLowerCase()} <b>${wClicks}</b> click${wClicks === 1 ? '' : 's'}` : 'no clicks'}</div>
+        <div class="wnote">${noWind ? `all spin drift — the bullet's spin curves it ${spinDir} ${f(Math.abs(at.spinIn), 1)}"` : `±${f(e5, 2)} ${u} per 5 mph${Math.abs(spinU) >= click / 2 ? ` · spin drift already counted` : ''}`}</div>
       </div>
     </div>
     <div class="sol-stats">
