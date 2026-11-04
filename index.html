@@ -12,6 +12,8 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Zero In</title>
 <style>
+html{touch-action:manipulation}
+button,.btn,.seg button,nav button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 :root{
   --bg:#141816; --panel:#1d2320; --panel2:#252c28; --line:#344039; --text:#eef0ea; --dim:#9aa59c;
   --accent:#e8a33d; --accent-ink:#1a1206; --good:#7cc47a; --bad:#e8664f; --shot:#e8664f; --center:#4fb3e8;
@@ -138,6 +140,8 @@ body:has(.quick){padding-bottom:calc(150px + env(safe-area-inset-bottom))}
 .in-label{width:62px;font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--dim)}
 .stepper{flex:1;display:flex;align-items:center;gap:6px;position:relative}
 .stepper button{width:52px;height:52px;border-radius:12px;border:1px solid var(--line);background:var(--panel2);color:var(--text);font-size:26px;font-weight:600;flex:none}
+.stepper button{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:transform .06s,background .06s}
+.stepper button.held,.stepper button:active{transform:scale(.94);background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .stepper input.big{text-align:center;font-size:24px;font-weight:800;padding:8px 34px 8px 8px}
 .stepper .unit-s{position:absolute;right:66px;color:var(--dim);font-size:13px;font-weight:700;pointer-events:none}
 .clock-wrap{display:flex;flex-direction:column;align-items:center;margin:4px 0 8px}
@@ -170,9 +174,9 @@ body:has(.quick){padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   <button data-tab="data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 9h8M8 13h8"/></svg>Data</button>
   <button data-tab="more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>More</button>
 </nav>
-<script src="drag.js?v=10"></script>
-<script src="ballistics.js?v=10"></script>
-<script src="app.js?v=10"></script>
-<script src="spotter.js?v=10"></script>
+<script src="drag.js?v=11"></script>
+<script src="ballistics.js?v=11"></script>
+<script src="app.js?v=11"></script>
+<script src="spotter.js?v=11"></script>
 </body>
 </html>

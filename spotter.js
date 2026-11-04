@@ -32,11 +32,12 @@ function solution() {
     twistIn: +b.twist, twistDir: b.twistDir, weightGr: +b.weight, diameterIn: +b.diam, lengthIn: num(b.length),
     rangeYd: +c.range, lookAngle: +c.angle, atm, zeroAtm, windMph: +c.windMph, windFromClock: +c.windClock };
   if (!(p.bc > 0 && p.mv > 500 && p.rangeYd > 0)) return null;
-  const s = BAL.solve(p, [1000]);
+  const s = BAL.solve(p);
   const at = s.at(p.rangeYd);
-  // wind per 5 mph (for brackets)
-  const s5 = BAL.solve({ ...p, windMph: 5, windFromClock: 3 }); const w5 = s5.at(p.rangeYd), w0 = BAL.solve({ ...p, windMph: 0 }).at(p.rangeYd);
-  return { p, s, at, per5: Math.abs(w5.windMoa - w0.windMoa), r, b, c, atm };
+  // Wind per 5 mph (for brackets): full-value 5 mph minus the spin-drift part, one extra trajectory instead of two.
+  const w5 = BAL.solve({ ...p, windMph: 5, windFromClock: 3 }).at(p.rangeYd);
+  const spinMoa = Math.atan(w5.spinIn / 12 / (p.rangeYd * 3)) * 180 / Math.PI * 60;
+  return { p, s, at, per5: Math.abs(w5.windMoa + spinMoa), r, b, c, atm };
 }
 
 function renderSpotter(v) {
@@ -98,16 +99,28 @@ function renderSpotter(v) {
   $('#sp_load').onclick = () => editBal(rifle());
   const fx = $('#sp_fix'); if (fx) fx.onclick = e => { e.preventDefault(); editBal(rifle()); };
   const fx2 = $('#sp_fix2'); if (fx2) fx2.onclick = e => { e.preventDefault(); trueIt(); };
-  const bind = (id, key) => { $(id).oninput = e => { c[key] = e.target.value; save(); updateSol(); }; };
+  const bind = (id, key) => { $(id).oninput = e => { c[key] = e.target.value; saveSoon(); queueSol(); }; };
   bind('#sp_range', 'range'); bind('#sp_wind', 'windMph'); bind('#sp_angle', 'angle'); bind('#sp_temp', 'tempF'); bind('#sp_alt', 'altFt'); bind('#sp_hum', 'humidity');
-  v.querySelectorAll('[data-step]').forEach(btn => btn.onclick = () => {
+  // − / + buttons: fire on touch‑down (no tap delay), hold to repeat and speed up.
+  const stepOnce = btn => {
     const k = btn.dataset.step, d = +btn.dataset.d;
     let val = (num(c[k]) || 0) + d;
     if (k === 'range') val = Math.max(25, Math.round(val / 25) * 25);
     if (k === 'windMph') val = Math.max(0, val);
     if (k === 'angle') val = Math.max(-60, Math.min(60, val));
-    c[k] = val; save();
-    $(({ range: '#sp_range', windMph: '#sp_wind', angle: '#sp_angle' })[k]).value = val; updateSol();
+    c[k] = val; saveSoon();
+    $(({ range: '#sp_range', windMph: '#sp_wind', angle: '#sp_angle' })[k]).value = val; queueSol();
+  };
+  v.querySelectorAll('[data-step]').forEach(btn => {
+    let timer = 0, n = 0;
+    const stop = () => { clearTimeout(timer); timer = 0; btn.classList.remove('held'); };
+    const tick = () => { stepOnce(btn); n++; timer = setTimeout(tick, n < 4 ? 160 : n < 12 ? 90 : 45); };
+    btn.addEventListener('pointerdown', e => { e.preventDefault(); stop(); n = 0; btn.classList.add('held');
+      try { btn.setPointerCapture(e.pointerId); } catch (x) {}
+      stepOnce(btn); timer = setTimeout(tick, 380); });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => btn.addEventListener(ev, stop));
+    btn.addEventListener('contextmenu', e => e.preventDefault());
+    btn.addEventListener('click', e => { if (e.detail === 0) stepOnce(btn); }); // keyboard / accessibility only
   });
   bindClock();
   $('#sp_measure').onclick = measureAngle;
@@ -144,6 +157,9 @@ function bindClock() {
   };
 }
 
+let solQueued = false, saveTimer = 0;
+function queueSol() { if (solQueued) return; solQueued = true; requestAnimationFrame(() => { solQueued = false; updateSol(); }); }
+function saveSoon() { clearTimeout(saveTimer); saveTimer = setTimeout(save, 400); }
 function updateSol() {
   const el = $('#sol'); if (!el) return;
   let sol; try { sol = solution(); } catch (e) { sol = null; }
