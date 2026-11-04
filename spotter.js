@@ -44,9 +44,9 @@ function renderSpotter(v) {
   v.innerHTML = `
   <div class="spot-head">
     <select id="sp_rifle" class="chip-select">${S.rifles.map(x => `<option value="${x.id}" ${x.id === r.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</select>
-    <button class="btn small" id="sp_load">${esc(b.bullet ? b.bullet.replace(/^Hornady /, '').replace(/\s*\(.*\)/, '') : 'Set load')} · ${esc(b.mv)} fps</button>
+    <button class="btn small" id="sp_load">${esc(b.bullet ? b.bullet.replace(/^Hornady /, '').replace(/\s*\(.*\)/, '') : 'Set load')} · ${esc(b.mv)} fps${b.trued ? ' ✓' : ''}</button>
   </div>
-  ${b.mvEstimated ? `<div class="warn" style="margin:0 0 10px">Muzzle velocity is an <b>estimate</b>. Chrono your rifle and enter it in <a href="#" id="sp_fix" style="color:inherit">load data</a> — it's the #1 thing that makes long shots hit.</div>` : ''}
+  ${b.mvEstimated ? `<div class="warn" style="margin:0 0 10px">Muzzle velocity is an <b>estimate</b>. Chrono your rifle and enter it in <a href="#" id="sp_fix" style="color:inherit">load data</a>, or shoot far and <a href="#" id="sp_fix2" style="color:inherit">true it</a> — it's the #1 thing that makes long shots hit.</div>` : ''}
 
   <div id="sol"></div>
   <div id="spq" class="quick spq" hidden></div>
@@ -91,11 +91,13 @@ function renderSpotter(v) {
   </div>
 
   <button class="btn block" id="sp_card">📋 Dope card for these conditions</button>
+  <button class="btn block" id="sp_true" style="margin-top:10px">🎯 True it — hits high or low far out?</button>
   <div class="tiny" style="margin:10px 2px 0">Wind is the hardest part. Read it at the target, not where you sit. Bracket it: the ± line tells you how much each 5 mph changes your hold.</div>
   `;
   $('#sp_rifle').onchange = e => { S.activeRifle = e.target.value; save(); render(); };
   $('#sp_load').onclick = () => editBal(rifle());
   const fx = $('#sp_fix'); if (fx) fx.onclick = e => { e.preventDefault(); editBal(rifle()); };
+  const fx2 = $('#sp_fix2'); if (fx2) fx2.onclick = e => { e.preventDefault(); trueIt(); };
   const bind = (id, key) => { $(id).oninput = e => { c[key] = e.target.value; save(); updateSol(); }; };
   bind('#sp_range', 'range'); bind('#sp_wind', 'windMph'); bind('#sp_angle', 'angle'); bind('#sp_temp', 'tempF'); bind('#sp_alt', 'altFt'); bind('#sp_hum', 'humidity');
   v.querySelectorAll('[data-step]').forEach(btn => btn.onclick = () => {
@@ -111,6 +113,7 @@ function renderSpotter(v) {
   $('#sp_measure').onclick = measureAngle;
   $('#sp_loc').onclick = useLocation;
   $('#sp_card').onclick = dopeCard;
+  $('#sp_true').onclick = trueIt;
   updateSol();
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver(([e]) => { const q = $('#spq'); if (q) q.hidden = e.isIntersecting; }, { threshold: 0.35 });
@@ -308,4 +311,90 @@ function dopeCard() {
     <div class="tiny" style="margin-bottom:8px">${esc(r.name)} · ${esc(base.b.bullet)} · ${base.b.mv} fps · ${c.tempF}°F · ${Number(c.altFt).toLocaleString()} ft · angle ${c.angle}°. Elevation is UP from your ${r.zeroDist} ${r.distUnit} zero. Wind = full‑value 10 mph.</div>
     <div style="overflow-x:auto"><table><thead><tr><th class="n">Yd</th><th class="n">Up ${u}</th><th class="n">Clicks</th><th class="n">Wind10</th><th class="n">fps</th><th class="n">ft‑lb</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>
     <div class="tiny" style="margin-top:8px">Screenshot this as a backup. Half the wind column for 5 mph, or for winds from 1, 5, 7 and 11 o'clock.</div>`);
+}
+
+/* ---------- Velocity truing ----------
+   You shoot at distance, tell us what elevation actually hit center. We find the muzzle velocity that makes the
+   solver agree, using today's conditions and angle. That "trued" velocity then drives every call. */
+function elevAt(p, mv) { return BAL.solve({ ...p, mv, windMph: 0 }).at(p.rangeYd).elevMoa; }
+function solveMv(p, wantMoa) {
+  // Elevation needed falls as velocity rises, so bisect.
+  let lo = p.mv * 0.75, hi = p.mv * 1.25;
+  const eLo = elevAt(p, lo), eHi = elevAt(p, hi);
+  if (wantMoa > eLo || wantMoa < eHi) return null; // more than ±25% off — something else is wrong
+  for (let i = 0; i < 28; i++) {
+    const mid = (lo + hi) / 2;
+    if (elevAt(p, mid) > wantMoa) lo = mid; else hi = mid;
+  }
+  return (lo + hi) / 2;
+}
+
+function trueIt() {
+  const base = solution(); if (!base) return toast('Set load data first');
+  const { r, b, c } = base; const u = r.unit === 'MIL' ? 'MIL' : 'MOA';
+  const toU = m => r.unit === 'MIL' ? m / 3.43775 : m, fromU = x => r.unit === 'MIL' ? x * 3.43775 : x;
+  const st = { range: Math.max(+c.range || 0, 300), dial: '', miss: '', missDir: 'low' };
+  const predict = () => { const p = { ...base.p, rangeYd: st.range }; const a = BAL.solve({ ...p, windMph: 0 }).at(st.range); return { p, a }; };
+  const last = b.trueLog && b.trueLog.length ? b.trueLog[b.trueLog.length - 1] : null;
+  sheet('True your velocity', `
+    <div class="muted" style="margin-bottom:12px">Your scope and the math agree up close. Far out, small errors in velocity add up. Shoot a 3‑shot group far away and tell me where it landed — I'll back out what your rifle <i>really</i> shoots.</div>
+    <div class="tiny" style="margin-bottom:12px"><b>Best:</b> 600–900 yd, calm wind, conditions above set to today. Shoot from a solid rest.</div>
+    <div class="field"><label>Distance you shot (yd)</label><input id="t_rng" class="num" inputmode="numeric" value="${st.range}"></div>
+    <div class="field"><label>What you dialed (${u} up)</label><input id="t_dial" class="num" inputmode="decimal"></div>
+    <div class="field"><label>Where the group's center hit, vs. your aim (inches)</label>
+      <div class="row" style="align-items:center"><input id="t_miss" class="num" inputmode="decimal" placeholder="0" style="flex:1">
+      <div class="seg" id="t_dir" style="flex:1.3"><button data-d="low" class="on">Low</button><button data-d="high">High</button></div></div>
+      <div class="tiny" style="margin-top:4px">Dead center? Leave it 0. Ignore left/right — that's wind, not velocity.</div></div>
+    <div id="t_out"></div>
+    <button class="btn primary block" id="t_save" disabled>Use this velocity</button>
+    ${last ? `<div class="tiny" style="margin-top:10px">Last trued ${esc(last.date)} at ${last.range} yd: ${last.from} → <b>${last.to} fps</b>.</div>` : ''}
+    ${b.trueLog && b.trueLog.length ? `<button class="btn small block" id="t_undo" style="margin-top:8px">Undo last truing (back to ${b.trueLog[b.trueLog.length - 1].from} fps)</button>` : ''}`, el => {
+    const out = $('#t_out', el), save1 = $('#t_save', el), dial = $('#t_dial', el);
+    let result = null;
+    const refresh = (fillDial) => {
+      st.range = num($('#t_rng', el).value) || 0;
+      if (st.range < 100) { out.innerHTML = ''; save1.disabled = true; return; }
+      const { p, a } = predict(); if (!a) return;
+      dial.placeholder = `app said ${f(toU(a.elevMoa), 2)}`;
+      if (fillDial) dial.value = niceMoa(toU(a.elevMoa), r.click);
+      const dialed = num(dial.value), missIn = num($('#t_miss', el).value) || 0;
+      if (dialed == null) { out.innerHTML = ''; save1.disabled = true; return; }
+      // Low impact means you needed MORE up. Inches → MOA at this range.
+      const missMoa = Math.atan(missIn / 12 / (st.range * 3)) * 180 / Math.PI * 60;
+      const want = fromU(dialed) + (st.missDir === 'low' ? missMoa : -missMoa);
+      const mv = solveMv(p, want);
+      if (!mv) { result = null; save1.disabled = true;
+        out.innerHTML = `<div class="warn">That's too far off to be velocity (more than 25%). Check your zero at 100, the range, the conditions, and that your turret tracks.</div>`; return; }
+      result = { mv: Math.round(mv), range: st.range, want };
+      const d = result.mv - b.mv, pct = Math.abs(d) / b.mv * 100;
+      const vAt = BAL.solve({ ...p, mv, windMph: 0 }).at(st.range);
+      out.innerHTML = `
+        <div class="sol" style="margin:6px 0 12px">
+          <div class="k" style="text-align:center">YOUR RIFLE SHOOTS LIKE</div>
+          <div class="num" style="text-align:center;font-size:44px;font-weight:800;line-height:1.1;margin:4px 0">${result.mv.toLocaleString()} <span style="font-size:18px;font-weight:600">fps</span></div>
+          <div class="tiny" style="text-align:center">was ${Number(b.mv).toLocaleString()} fps · ${d === 0 ? 'no change' : `${d > 0 ? '+' : ''}${d} fps (${f(pct, 1)}%)`}</div>
+          <div class="tiny" style="text-align:center;margin-top:6px">At ${st.range} yd you needed <b>${f(toU(want), 2)} ${u}</b> up; the app had ${f(toU(a.elevMoa), 2)}.</div>
+        </div>
+        ${pct > 4 ? `<div class="warn">That's a big change. Before saving, double‑check: 100‑yd zero still good, range is lasered, temp/altitude set to today, and your turret tracks true.</div>` : ''}
+        ${vAt.mach < 1.2 ? `<div class="warn">The bullet is near the sound barrier at ${st.range} yd, where drag gets messy. True at a closer distance (where it's still fast) for the best result.</div>` : ''}`;
+      save1.disabled = false;
+    };
+    $('#t_rng', el).oninput = () => refresh(false);
+    dial.oninput = () => refresh(false);
+    $('#t_miss', el).oninput = () => refresh(false);
+    $('#t_dir', el).onclick = e => { const btn = e.target.closest('[data-d]'); if (!btn) return; st.missDir = btn.dataset.d;
+      el.querySelectorAll('#t_dir button').forEach(x => x.classList.toggle('on', x === btn)); refresh(false); };
+    save1.onclick = () => {
+      if (!result) return;
+      const bb = balOf(r);
+      bb.trueLog = bb.trueLog || [];
+      bb.trueLog.push({ wasEst: !!bb.mvEstimated, from: bb.mv, to: result.mv, range: result.range, date: new Date().toLocaleDateString(), cond: `${c.tempF}°F · ${c.altFt} ft` });
+      bb.mv = result.mv; bb.mvEstimated = false; bb.trued = true;
+      save(); closeSheet(); render(); toast(`Trued to ${result.mv} fps`);
+    };
+    const undo = $('#t_undo', el);
+    if (undo) undo.onclick = () => { const bb = balOf(r), x = bb.trueLog.pop(); bb.mv = x.from; bb.mvEstimated = !!x.wasEst; bb.trued = bb.trueLog.length > 0;
+      save(); closeSheet(); render(); toast(`Back to ${x.from} fps`); };
+    refresh(true);
+  });
 }
