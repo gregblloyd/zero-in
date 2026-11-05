@@ -94,6 +94,14 @@ th{color:var(--dim);font-size:12px;text-transform:uppercase;letter-spacing:.06em
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
 tr.best td{background:color-mix(in srgb,var(--good) 16%,transparent)}
 .warn{border-left:4px solid var(--bad);background:color-mix(in srgb,var(--bad) 10%,var(--panel));padding:10px 12px;border-radius:10px;font-size:14px;margin:10px 0}
+.ve-row{display:flex;gap:8px}
+.ve-in{flex:1;font-size:22px;font-weight:700;text-align:center}
+.ve-add{flex:none;white-space:nowrap}
+.ve-shots{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.ve-shot{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--line);border-radius:99px;padding:4px 4px 4px 10px;font-weight:700;font-variant-numeric:tabular-nums}
+.ve-shot small{color:var(--dim);font-weight:600}
+.ve-shot.hi{border-color:var(--accent)}.ve-shot.lo{border-color:var(--center)}
+.ve-shot button{border:0;background:none;color:var(--dim);font-size:20px;width:32px;height:32px;border-radius:99px;line-height:1}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chips button{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:99px;padding:8px 14px;font-weight:600;min-height:40px}
 .chips button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
@@ -174,9 +182,9 @@ body:has(.quick){padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   <button data-tab="data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 9h8M8 13h8"/></svg>Data</button>
   <button data-tab="more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>More</button>
 </nav>
-<script src="drag.js?v=11"></script>
-<script src="ballistics.js?v=11"></script>
-<script src="app.js?v=11"></script>
-<script src="spotter.js?v=11"></script>
+<script src="drag.js?v=12"></script>
+<script src="ballistics.js?v=12"></script>
+<script src="app.js?v=12"></script>
+<script src="spotter.js?v=12"></script>
 </body>
 </html>
