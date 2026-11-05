@@ -394,35 +394,37 @@ function renderLoads(v) {
   velEntry($('#chrono'), S.chrono, vs => { S.chrono = vs; save(); });
 }
 /* One-shot-at-a-time velocity entry: type a number, tap Add (or Enter), keyboard stays up for the next shot. */
-function velEntry(host, vels, onChange) {
+function velEntry(host, vels, onChange, o = {}) {
   vels = [...(vels || [])];
+  const parse = o.parse || parseVels, rnd = o.round || Math.round, word = o.word || 'Shot', unit = o.unit || 'fps';
+  const sHtml = o.statsHtml || statsHtml;
   host.innerHTML = `
-    <div class="ve-row"><input class="num ve-in" inputmode="numeric" enterkeyhint="next" autocomplete="off" aria-label="Shot velocity in fps">
-      <button type="button" class="btn primary ve-add">+ Add shot</button></div>
+    <div class="ve-row"><input class="num ve-in" inputmode="${o.inputmode || 'numeric'}" enterkeyhint="next" autocomplete="off" aria-label="${word} in ${unit}">
+      <button type="button" class="btn primary ve-add">+ Add ${word.toLowerCase()}</button></div>
     <div class="ve-stats"></div><div class="ve-shots"></div><div class="ve-foot"></div>`;
   const inp = host.querySelector('.ve-in'), add = host.querySelector('.ve-add');
   const draw = () => {
-    inp.placeholder = `Shot ${vels.length + 1} · fps`;
+    inp.placeholder = `${word} ${vels.length + 1} · ${unit}`;
     const st = stats(vels);
     host.querySelector('.ve-shots').innerHTML = vels.map((v, i) => {
       const tag = st && st.n > 2 ? (v === st.max ? ' hi' : v === st.min ? ' lo' : '') : '';
-      return `<span class="ve-shot${tag}"><small>${i + 1}</small>${v}<button type="button" data-i="${i}" aria-label="Remove shot ${i + 1}">×</button></span>`; }).join('');
-    host.querySelector('.ve-stats').innerHTML = st ? `<div style="margin-top:10px">${statsHtml(st)}</div>` : '<div class="tiny" style="margin-top:6px">Type one velocity, tap Add shot, repeat. Average, SD and ES update as you go.</div>';
-    host.querySelector('.ve-foot').innerHTML = vels.length ? `<div class="tiny" style="margin:2px 0 8px">Tap × to drop a shot.${st && st.n > 2 ? ' Orange = fastest, blue = slowest.' : ''}</div><button type="button" class="btn small ve-clear">Clear all shots</button>` : '';
+      return `<span class="ve-shot${tag}"><small>${i + 1}</small>${v}<button type="button" data-i="${i}" aria-label="Remove ${word} ${i + 1}">×</button></span>`; }).join('');
+    host.querySelector('.ve-stats').innerHTML = st ? `<div style="margin-top:10px">${sHtml(st)}</div>` : `<div class="tiny" style="margin-top:6px">${o.hint || 'Type one velocity, tap Add shot, repeat. Average, SD and ES update as you go.'}</div>`;
+    host.querySelector('.ve-foot').innerHTML = vels.length ? `<div class="tiny" style="margin:2px 0 8px">Tap × to drop a ${word.toLowerCase()}.${st && st.n > 2 ? ` Orange = ${o.hiWord || 'fastest'}, blue = ${o.loWord || 'slowest'}.` : ''}</div><button type="button" class="btn small ve-clear">Clear all</button>` : '';
     host.querySelectorAll('.ve-shot button').forEach(b => b.onclick = () => { vels.splice(+b.dataset.i, 1); onChange([...vels]); draw(); });
-    const cl = host.querySelector('.ve-clear'); if (cl) cl.onclick = () => { if (!confirm(`Clear all ${vels.length} shots?`)) return; vels = []; onChange([]); draw(); };
+    const cl = host.querySelector('.ve-clear'); if (cl) cl.onclick = () => { if (!confirm(`Clear all ${vels.length}?`)) return; vels = []; onChange([]); draw(); };
   };
   const commit = () => {
-    const got = parseVels(inp.value); // also accepts a pasted list
-    if (!got.length) { if (inp.value.trim()) toast('Enter a velocity in fps'); return; }
-    vels.push(...got.map(Math.round)); inp.value = ''; onChange([...vels]); draw(); inp.focus();
+    const got = parse(inp.value); // also accepts a pasted list
+    if (!got.length) { if (inp.value.trim()) toast(`Enter a number in ${unit}`); return; }
+    vels.push(...got.map(rnd)); inp.value = ''; onChange([...vels]); draw(); inp.focus();
   };
   add.addEventListener('pointerdown', e => e.preventDefault()); // keep the keyboard open
   add.onclick = commit;
   inp.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); commit(); } };
   draw();
   // Count a number that was typed but not added yet, so Save never drops the last shot.
-  return () => { const g = parseVels(inp.value); if (g.length) { vels.push(...g.map(Math.round)); inp.value = ''; } return [...vels]; };
+  return () => { const g = parse(inp.value); if (g.length) { vels.push(...g.map(rnd)); inp.value = ''; } return [...vels]; };
 }
 const parseVels = t => String(t).split(/[\s,;]+/).map(num).filter(x => x && x > 100);
 const statsHtml = s => `<div class="grid2"><div class="stat"><span>Shots</span><b class="num">${s.n}</b></div><div class="stat"><span>Average</span><b class="num">${f(s.avg, 0)} fps</b></div><div class="stat"><span>SD</span><b class="num">${f(s.sd, 1)}</b></div><div class="stat"><span>ES</span><b class="num">${f(s.es, 0)}</b></div></div>`;
@@ -442,6 +444,7 @@ function renderLoad(v, l) {
   if (!l) { openLoad = null; return render(); }
   const tests = (l.tests || []).slice().sort((a, b) => (a.charge ?? 0) - (b.charge ?? 0));
   const best = bestTest(l);
+  const showJ = tests.some(t => num(t.cbto)) || num(l.lands);
   const bc = DATA && DATA.bullets ? DATA.bullets.find(b => bulletLabel(b) === l.bullet) : null;
   v.innerHTML = `
     <button class="btn small" id="back">‹ All loads</button>
@@ -456,12 +459,13 @@ function renderLoad(v, l) {
       ${l.notes ? `<div class="how" style="white-space:pre-wrap">${esc(l.notes)}</div>` : ''}
     </div>
     ${l.max ? `<div class="tiny" style="margin:-4px 0 10px">Tests above your manual max (${esc(l.max)} gr) are flagged in red.</div>` : ''}
+    ${coachHtml(l)}
 
     <h2>Workup results</h2>
     <div class="card">
-      ${tests.length ? `${chartSvg(tests)}<div style="overflow-x:auto"><table><thead><tr><th class="n">Charge</th><th class="n">Group</th><th class="n">MOA</th><th class="n">Avg fps</th><th class="n">SD</th><th class="n">ES</th></tr></thead><tbody>
+      ${tests.length ? `${chartSvg(tests)}<div style="overflow-x:auto"><table><thead><tr><th class="n">Charge</th>${showJ ? '<th class="n">Jump</th>' : ''}<th class="n">Group</th><th class="n">MOA</th><th class="n">Avg fps</th><th class="n">SD</th><th class="n">ES</th></tr></thead><tbody>
         ${tests.map(t => { const s = stats(t.vels || []); const m = testMoa(t); const over = l.max && t.charge > num(l.max);
-          return `<tr data-test="${t.id}" class="${best && best.id === t.id ? 'best' : ''}" style="cursor:pointer"><td class="n" style="${over ? 'color:var(--bad);font-weight:700' : ''}">${f(t.charge, 1)}</td><td class="n">${t.group != null ? f(t.group, 2) + '"' : '<span class="muted">tap</span>'}</td><td class="n">${f(m, 2)}</td><td class="n">${s ? f(s.avg, 0) : '–'}</td><td class="n">${s && s.n > 1 ? f(s.sd, 1) : '–'}</td><td class="n">${s && s.n > 1 ? f(s.es, 0) : '–'}</td></tr>`; }).join('')}
+          return `<tr data-test="${t.id}" class="${best && best.id === t.id ? 'best' : ''}" style="cursor:pointer"><td class="n" style="${over || (t.press || []).length ? 'color:var(--bad);font-weight:700' : ''}">${(t.press || []).length ? '⚠ ' : ''}${f(t.charge, 1)}</td>${showJ ? `<td class="n">${(() => { const j = jumpOf(l, t.cbto || l.cbto); return j == null ? '–' : j < -0.0015 ? `<span style="color:var(--bad)">−${f3(-j).slice(1)}</span>` : f3(j).slice(1); })()}</td>` : ''}<td class="n">${t.group != null ? f(t.group, 2) + '"' : '<span class="muted">tap</span>'}</td><td class="n">${f(m, 2)}</td><td class="n">${s ? f(s.avg, 0) : '–'}</td><td class="n">${s && s.n > 1 ? f(s.sd, 1) : '–'}</td><td class="n">${s && s.n > 1 ? f(s.es, 0) : '–'}</td></tr>`; }).join('')}
         </tbody></table></div>
         ${best ? `<div class="tiny" style="margin-top:8px">Green row = smallest group so far. Look for a spot where 2–3 charges in a row group well and velocity flattens out — that's your most forgiving load.</div>` : ''}` : `<div class="empty">No tests yet. Build a ladder or add one charge at a time.</div>`}
       <div class="tool"><button class="btn small" id="ladder">Build a ladder</button><button class="btn small primary" id="addt">+ Add test</button></div>
@@ -470,6 +474,7 @@ function renderLoad(v, l) {
   $('#edit').onclick = () => editLoad(l);
   $('#addt').onclick = () => editTest(l, null);
   $('#ladder').onclick = () => ladder(l);
+  bindCoach(v, l);
   v.querySelectorAll('[data-test]').forEach(tr => tr.onclick = () => editTest(l, l.tests.find(t => t.id === tr.dataset.test)));
 }
 function chartSvg(tests) {
@@ -514,12 +519,15 @@ function editLoad(l, prefill) {
     <div class="field"><label>Source (manual, edition, page)</label><input id="l_source" value="${esc(l.source)}" placeholder="Hornady 11th ed. p. 312"></div>
     <div class="grid2"><div class="field"><label>COAL (in)</label><input id="l_coal" inputmode="decimal" value="${esc(l.coal)}"></div>
       <div class="field"><label>CBTO (in)</label><input id="l_cbto" inputmode="decimal" value="${esc(l.cbto)}"></div></div>
+    <div class="grid2"><div class="field"><label>Goal velocity low (fps)</label><input id="l_targetLo" inputmode="numeric" value="${esc(l.targetLo)}" placeholder="e.g. 2880"></div>
+      <div class="field"><label>Goal velocity high (fps)</label><input id="l_targetHi" inputmode="numeric" value="${esc(l.targetHi)}" placeholder="e.g. 2920"></div></div>
+    <div class="tiny" style="margin:-6px 0 10px">Tip: chrono the factory ammo that shoots well in your rifle and use that.</div>
     <div class="field"><label>Seating depth / crimp</label><input id="l_crimp" value="${esc(l.crimp)}" placeholder="0.020 off lands / light taper crimp"></div>
     <div class="field"><label>Status</label><select id="l_status">${Object.entries(STATUS).map(([k, n]) => `<option value="${k}" ${l.status === k ? 'selected' : ''}>${n}</option>`).join('')}</select></div>
     <div class="field"><label>Notes</label><textarea id="l_notes">${esc(l.notes)}</textarea></div>
     <button class="btn primary block" id="l_save">Save load</button>
     ${isNew ? '' : `<button class="btn block" id="l_dup" style="margin-top:10px">Duplicate</button><button class="btn danger block" id="l_del" style="margin-top:10px">Delete load</button>`}`;
-  const grab = el => ['name', 'bullet', 'powder', 'primer', 'brass', 'firings', 'start', 'max', 'source', 'coal', 'cbto', 'crimp', 'status', 'notes'].forEach(k => { l[k] = $('#l_' + k, el).value.trim(); });
+  const grab = el => ['name', 'bullet', 'powder', 'primer', 'brass', 'firings', 'start', 'max', 'source', 'coal', 'cbto', 'targetLo', 'targetHi', 'crimp', 'status', 'notes'].forEach(k => { l[k] = $('#l_' + k, el).value.trim(); });
   const bind = el => {
     $('#lc', el).onclick = e => { const b = e.target.closest('button'); if (!b) return; grab(el); l.cartridge = b.dataset.c; $('.inner', el).lastElementChild; el.querySelector('.inner').innerHTML = el.querySelector('.bar').outerHTML + body(); $('#sx', el).onclick = closeSheet; bind(el); };
     $('#l_save', el).onclick = () => {
@@ -542,17 +550,24 @@ function editTest(l, t) {
     <div id="t_over"></div>
     <div class="grid2"><div class="field"><label>Group size c‑c (in)</label><input id="t_group" inputmode="decimal" value="${t.group ?? ''}"></div>
       <div class="field"><label>Distance (yd)</label><input id="t_dist" inputmode="decimal" value="${t.distance ?? 100}"></div></div>
+    <div class="grid2"><div class="field"><label>CBTO (in)</label><input id="t_cbto" inputmode="decimal" value="${esc(t.cbto ?? l.cbto ?? '')}" placeholder="base to ogive"></div>
+      <div class="field"><label>Jump</label><div id="t_jump" class="num" style="padding:14px 4px;font-weight:700"></div></div></div>
     <div class="field"><label>Velocities (fps)</label><div id="t_vels"></div></div>
+    <div class="field"><label>Pressure signs (check after every shot)</label><div class="chips" id="t_press">${PRESS.map(([k, n]) => `<button type="button" data-k="${k}" class="${(t.press || []).includes(k) ? 'on bad' : ''}">${n}</button>`).join('')}</div></div>
     <div class="grid2"><div class="field"><label>Rifle</label><select id="t_rifle">${S.rifles.map(r => `<option value="${r.id}" ${r.id === t.rifleId ? 'selected' : ''}>${esc(r.name)}</option>`).join('')}</select></div>
       <div class="field"><label>Temp (°F)</label><input id="t_temp" inputmode="decimal" value="${esc(t.temp)}"></div></div>
     <div class="field"><label>Pressure signs / notes</label><textarea id="t_notes" placeholder="Flat primers? Heavy bolt lift? Ejector marks?">${esc(t.notes)}</textarea></div>
     <button class="btn primary block" id="t_save">Save test</button>
     ${isNew ? '' : `<button class="btn danger block" id="t_del" style="margin-top:10px">Delete test</button>`}`, el => {
     const getVels = velEntry($('#t_vels', el), t.vels, () => {});
+    el.querySelector('#t_press').onclick = e => { const b = e.target.closest('button'); if (b) b.classList.toggle('on'), b.classList.toggle('bad'); };
+    const updJ = () => { const j = jumpOf(l, $('#t_cbto', el).value); $('#t_jump', el).innerHTML = j == null ? '<span class="muted">set lands</span>' : j < -0.0015 ? `<span style="color:var(--bad)">${f3(-j)} jammed</span>` : `${f3(j)} off`; };
+    $('#t_cbto', el).oninput = updJ; updJ();
     const upd = () => { const c = num($('#t_charge', el).value); $('#t_over', el).innerHTML = l.max && c > num(l.max) ? `<div class="warn">This is <b>above the manual max</b> of ${esc(l.max)} gr you entered for this load.</div>` : ''; };
     $('#t_charge', el).oninput = upd; upd();
     $('#t_save', el).onclick = () => {
       Object.assign(t, { charge: num($('#t_charge', el).value), date: $('#t_date', el).value, group: num($('#t_group', el).value), distance: num($('#t_dist', el).value) || 100,
+        cbto: $('#t_cbto', el).value.trim(), press: [...el.querySelectorAll('#t_press button.on')].map(b => b.dataset.k),
         vels: getVels(), rifleId: $('#t_rifle', el).value, temp: $('#t_temp', el).value, notes: $('#t_notes', el).value });
       l.tests = l.tests || []; const i = l.tests.findIndex(x => x.id === t.id); if (i >= 0) l.tests[i] = t; else l.tests.push(t);
       save(); closeSheet(); render();
@@ -560,11 +575,12 @@ function editTest(l, t) {
     const d = $('#t_del', el); if (d) d.onclick = () => { l.tests = l.tests.filter(x => x.id !== t.id); save(); closeSheet(); render(); };
   });
 }
-function ladder(l) {
+function ladder(l, pre = {}) {
   sheet('Build a ladder', `
     <div class="muted" style="margin-bottom:12px">Creates one row per charge so you can fill in groups and velocities at the range. Use the start and max from your manual.</div>
-    <div class="grid2"><div class="field"><label>Start (gr)</label><input id="g_s" inputmode="decimal" value="${esc(l.start)}"></div><div class="field"><label>End (gr)</label><input id="g_e" inputmode="decimal" value="${esc(l.max)}"></div></div>
-    <div class="field"><label>Step (gr)</label><select id="g_st">${[0.1, 0.2, 0.3, 0.4, 0.5, 1].map(s => `<option ${s === (l.cartridge === '9mm' ? 0.1 : (l.cartridge === '7prc' ? 0.5 : 0.3)) ? 'selected' : ''}>${s}</option>`).join('')}</select></div>
+    <div class="grid2"><div class="field"><label>Start (gr)</label><input id="g_s" inputmode="decimal" value="${esc(pre.s ?? l.start)}"></div><div class="field"><label>End (gr)</label><input id="g_e" inputmode="decimal" value="${esc(pre.e ?? l.max)}"></div></div>
+    <div class="field"><label>Step (gr)</label><select id="g_st">${[0.1, 0.2, 0.3, 0.4, 0.5, 1].map(s => `<option ${s === (pre.step || (l.cartridge === '9mm' ? 0.1 : (l.cartridge === '7prc' ? 0.5 : 0.3))) ? 'selected' : ''}>${s}</option>`).join('')}</select></div>
+    <div class="field"><label>Seat all to CBTO (in)</label><input id="g_cb" inputmode="decimal" value="${esc(pre.cbto ?? l.cbto ?? '')}" placeholder="optional"></div>
     <div id="g_prev" class="tiny"></div>
     <button class="btn primary block" id="g_go" style="margin-top:12px">Create rows</button>`, el => {
     const steps = () => { const s = num($('#g_s', el).value), e = num($('#g_e', el).value), st = +$('#g_st', el).value; if (!s || !e || e < s) return []; const out = []; for (let c = s; c <= e + 1e-6 && out.length < 40; c += st) out.push(Math.round(c * 10) / 10); return out; };
@@ -573,7 +589,7 @@ function ladder(l) {
     $('#g_go', el).onclick = () => {
       const s = steps(); if (!s.length) return toast('Enter a start and end');
       if (l.max && s[s.length - 1] > num(l.max)) { if (!confirm('The ladder goes above the manual max you entered. Continue?')) return; }
-      l.tests = l.tests || []; s.forEach(c => l.tests.push({ id: uid(), charge: c, date: new Date().toISOString().slice(0, 10), distance: 100, rifleId: S.activeRifle, vels: [] }));
+      l.tests = l.tests || []; const cb = $('#g_cb', el).value.trim(); s.forEach(c => l.tests.push({ id: uid(), charge: c, cbto: cb, date: new Date().toISOString().slice(0, 10), distance: 100, rifleId: S.activeRifle, vels: [] }));
       save(); closeSheet(); render(); toast(`${s.length} rows added`);
     };
   });

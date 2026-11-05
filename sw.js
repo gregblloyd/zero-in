@@ -1,5 +1,5 @@
-const CACHE = 'zeroin-v12';
-const FILES = ['./', './index.html', './app.js', './drag.js', './ballistics.js', './spotter.js', './data.json', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-180.png', './icon-32.png', './icon.svg'];
+const CACHE = 'zeroin-v13';
+const FILES = ['./', './index.html', './app.js', './drag.js', './ballistics.js', './spotter.js', './workup.js', './data.json', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-180.png', './icon-32.png', './icon.svg'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
 });

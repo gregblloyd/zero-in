@@ -102,6 +102,20 @@ tr.best td{background:color-mix(in srgb,var(--good) 16%,transparent)}
 .ve-shot small{color:var(--dim);font-weight:600}
 .ve-shot.hi{border-color:var(--accent)}.ve-shot.lo{border-color:var(--center)}
 .ve-shot button{border:0;background:none;color:var(--dim);font-size:20px;width:32px;height:32px;border-radius:99px;line-height:1}
+.coach{padding:4px 14px}
+.co-sec{padding:12px 0;border-bottom:1px solid var(--line)}.co-sec:last-child{border-bottom:0}
+.co-h{font-weight:750;font-size:15px;margin-bottom:8px}
+.co-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+.co-cell{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:8px;color:var(--text);min-width:0}
+.co-cell span{font-size:11px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.co-cell b{font-size:17px}.co-cell small{font-size:11px;color:var(--dim);line-height:1.25}
+.co-line{font-size:14.5px;line-height:1.45;margin:4px 0 8px}
+.co-flag{font-size:13.5px;line-height:1.4;padding:8px 10px;border-radius:10px;background:var(--panel2);margin:6px 0}
+.co-flag.bad{border-left:4px solid var(--bad)}.co-flag.good{border-left:4px solid var(--good)}
+.co-tip{font-size:13.5px;margin:6px 0 10px;color:var(--dim)}
+.co-steps{margin:6px 0 8px 18px;padding:0;font-size:14px;line-height:1.45}.co-steps li{margin:4px 0}
+.co-steps li.done{color:var(--dim);text-decoration:line-through}
+.chips button.on.bad{background:var(--bad);border-color:var(--bad);color:#fff}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chips button{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:99px;padding:8px 14px;font-weight:600;min-height:40px}
 .chips button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
@@ -182,9 +196,10 @@ body:has(.quick){padding-bottom:calc(150px + env(safe-area-inset-bottom))}
   <button data-tab="data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"/><path d="M8 9h8M8 13h8"/></svg>Data</button>
   <button data-tab="more"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>More</button>
 </nav>
-<script src="drag.js?v=12"></script>
-<script src="ballistics.js?v=12"></script>
-<script src="app.js?v=12"></script>
-<script src="spotter.js?v=12"></script>
+<script src="drag.js?v=13"></script>
+<script src="ballistics.js?v=13"></script>
+<script src="app.js?v=13"></script>
+<script src="spotter.js?v=13"></script>
+<script src="workup.js?v=13"></script>
 </body>
 </html>
